@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Recebe o login, salva e responde com a página branca pedida
+// Recebe o login e salva no banco, mas não muda de página
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
@@ -37,11 +37,11 @@ app.post("/login", (req, res) => {
     [username, password],
     function (err) {
       if (err) console.error(err.message);
+      // apenas envia status 200, sem abrir outra página
       res.sendStatus(200);
     }
   );
 });
-
 
 // Lista usuários (para você conferir)
 app.get("/usuarios", (req, res) => {
@@ -55,4 +55,3 @@ app.get("/usuarios", (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
-
